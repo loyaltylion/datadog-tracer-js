@@ -92,4 +92,9 @@ describe('Recorder', () => {
 
     return recorder.record(span)
   })
+
+  it('should not send non-sampled requests to the Datadog agent', () => {
+    spanContext.sampled = false
+    return recorder.record(span)
+  })
 })

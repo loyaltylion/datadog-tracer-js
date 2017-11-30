@@ -17,7 +17,7 @@ class DatadogSpan extends Span {
     const tags = fields.tags || {}
 
     this._parentTracer = tracer
-    this._sampler = new Sampler()
+    this._sampler = new Sampler(tracer._sampleRate)
     this._recorder = new Recorder()
     this._operationName = operationName
     this._tags = Object.assign({}, tags)

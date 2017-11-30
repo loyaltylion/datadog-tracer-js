@@ -22,6 +22,9 @@ class DatadogRecorder {
       duration: Math.max(Math.round(span._duration * 1e6), 1)
     }]])
 
+    if (!spanContext.sampled) {
+      return Promise.resolve()
+    }
     return platform.request({
       protocol: tracer._endpoint.protocol,
       hostname: tracer._endpoint.hostname,

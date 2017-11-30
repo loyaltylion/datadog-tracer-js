@@ -1,8 +1,15 @@
 'use strict'
 
 class DatadogSampler {
-  isSampled (span) {
-    return true
+  constructor(rate) {
+    if (!rate) {
+      rate = 1.0
+    }
+    this.rate = rate
+  }
+
+  isSampled(span) {
+    return Math.random() <= this.rate
   }
 }
 

@@ -14,6 +14,7 @@ class DatadogTracer extends Tracer {
     EventEmitter.call(this)
 
     const service = config.service
+    const sampleRate = config.sampleRate
     const endpoint = config.endpoint
     const hostname = config.hostname || 'localhost'
     const port = config.port || 8126
@@ -21,6 +22,7 @@ class DatadogTracer extends Tracer {
 
     this._service = service
     this._endpoint = new Endpoint(endpoint || `${protocol}://${hostname}:${port}`)
+    this._sampleRate = sampleRate || 1.0
     this._propagators = {
       [opentracing.FORMAT_TEXT_MAP]: new TextMapPropagator(),
       [opentracing.FORMAT_HTTP_HEADERS]: new TextMapPropagator(),
